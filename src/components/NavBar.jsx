@@ -19,10 +19,10 @@ const NavButton = ({ title, customFunc, icon, color, dotColor})=>(
       <span style={{background:dotColor}}
     className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
     
-    >
-      {icon}
+    />
+     {icon}
+     
 
-    </span>
 
 
     </button>
@@ -33,7 +33,30 @@ const NavButton = ({ title, customFunc, icon, color, dotColor})=>(
 )
 
 function NavBar() {
-  const  {isActiveMenu, setIsActiveMenu, isClicked, setIsClicked, handleClick } = useStateContext();  
+  const  {isActiveMenu, setIsActiveMenu, isClicked, setIsClicked, handleClick, screenSize,
+    setScreenSize } = useStateContext(); 
+
+    useEffect(()=>{
+      const handleResize = () =>setScreenSize(window.innerWidth);
+
+      window.addEventListener('resize', handleResize);
+
+      handleResize();
+
+      return ()=> window.removeEventListener('resize'. handleResize)
+
+
+    }, [])
+
+    useEffect(()=>{
+      if (screenSize <= 900){
+        setIsActiveMenu(false)
+      }else{
+        setIsActiveMenu(true)
+      }
+    },[screenSize])
+
+ 
   return  (
     <div className='flex justify-between p-2 md:ml-6 md:mr-6 relative'>
      <NavButton
