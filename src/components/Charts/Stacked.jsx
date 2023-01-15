@@ -2,6 +2,7 @@ import React from 'react'
 import {ChartComponent, SeriesCollectionDirective,SeriesDirective, Inject, Legend, Category, StackingColumnSeries, Tooltip} from '@syncfusion/ej2-react-charts'
 import {stackedCustomSeries, stackedPrimaryXAxis} from '../../data/dummy'
 
+//sta 
 function Stacked({width, height}) {
 
   return (

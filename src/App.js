@@ -5,17 +5,20 @@ import { FiSettings } from 'react-icons/fi';
 import { BrowserRouter } from "react-router-dom";
 import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 import {ThemeSettings,NavBar, SideBar, Footer } from './components';
-import {Ecommerce,Order, Calender, Stacked, Pyramid, Customer, Area, Pie, Financial, Kanban, ColorPicker, Line, ColorMapping, Editor, Employess
+import {Ecommerce,Order, Calender,
+   Stacked, Pyramid, Customer, Area, Pie, Financial, Kanban, ColorPicker, Line, ColorMapping, Editor, Employess
  } from './pages'
  import { useStateContext } from './context/ContextProvider';
 
 import './App.css';
 
 function App() {
-  const {isActiveMenu} = useStateContext();
+  const {isActiveMenu, currentMode, setThemeSettings, themeSettings, currentColor} = useStateContext();
 
  
   return (
+    <div className={currentMode === "Dark" ? 'dark' : ''}>
+
     <BrowserRouter>
      <div className="flex relative dark:bg-main-dark-bg">
       <div className="fixed right-4 bottom-4 " style={{zIndex: '1000'}}>
@@ -24,7 +27,9 @@ function App() {
           className="text-3xl 
           p-3 hover:drop-shadow-xl 
            hover:bg-light-gray text-white"
-           style={{background:"blue", borderRadius:'50%'}}
+           onClick={()=>setThemeSettings(true)}
+          
+           style={{background:currentColor, borderRadius:'50%'}}
            
            >
             <FiSettings/>
@@ -54,22 +59,29 @@ function App() {
         <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
               <NavBar />
             </div>
-      <Routes>
-        {/* dashboard */}
-  
+      
+
+    
+
+              <div>
+
+              </div>
+<div>
+  { themeSettings && <ThemeSettings/>}
+
+<Routes>
   <Route path="/ecommerce" element={<Ecommerce/>}/>
   <Route path="/sidebar" element={<SideBar/>}/>
 
         {/* pages */}
 
-  <Route path="/order" element={<Order/>}/>
+  <Route path="/orders" element={<Order/>}/>
   <Route path="/employees" element={<Employess/>}/>
   <Route path="/customers" element={<Customer/>}/>
-
    
-  <Route path="/kanban" elemen={<Kanban/>}/>
+  <Route path="/kanban" element={<Kanban/>}/>
   <Route path="/editor" element={<Editor/>}/>
-  <Route path="/calender" element={<Calender/>}/>
+  <Route path="/calendar" element={<Calender/>}/>
   <Route path="/color-picker" element={<ColorPicker/>}/>
 
         {/* chart */}
@@ -81,19 +93,20 @@ function App() {
   <Route path="/stacked" element={<Stacked/>}/>
   <Route path="/pyramid" element={<Pyramid/>}/>
             
-
-        
-
-        
-
-
       </Routes>
+
+</div>
+    
+
+        
+   
       
       
     </div>
     </div>
 
     </BrowserRouter>
+    </div>
    
   );
 }
