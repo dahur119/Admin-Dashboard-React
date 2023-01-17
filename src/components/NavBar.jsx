@@ -59,13 +59,14 @@ function NavBar() {
  
   return  (
     <div className='flex justify-between p-2 md:ml-6 md:mr-6 relative'>
-     <NavButton
-       title="Menu" 
+     <NavButton title="Menu" 
      customFunc={()=>setIsActiveMenu((prevState)=>!prevState)}
       color={currentColor}
       icon={<AiOutlineMenu/>}
      />
-     <div className='flex'>
+
+     
+     <div className='flex justify-between'>
 
      <NavButton
        title="Cart" 
@@ -91,15 +92,8 @@ function NavBar() {
       icon={<RiNotificationLine/>}
      />
 
-     <TooltipComponent
-     content="Profile" position="BottomCenter"
-     
-     >
-      <div className='flex items-center 
-      gap-2 cursor-pointer p-1
-       hover:bg-light-gray rounded-lg'
-       onClick={()=>setIsActiveMenu(()=>{})}
-       >
+     <TooltipComponent content="Profile" position="BottomCenter">
+      <div className='flex items-center gap-2 cursor-pointer p-1  hover:bg-light-gray rounded-lg'onClick={()=>setIsActiveMenu(()=>{})}>
         <img
         className='rounded-full w-8 h-8'
         src={avatar}
@@ -121,7 +115,7 @@ function NavBar() {
      </TooltipComponent>
 
      {isClicked.cart && <Cart/>}
-     {isClicked.chat && <Chat/>}
+     {isClicked.chat && <Chat/> }
      {isClicked.notification && <Notification/>}
      {isClicked.userProfile && <UserProfile/>}
   
